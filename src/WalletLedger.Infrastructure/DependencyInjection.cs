@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WalletLedger.Application.Interfaces;
 using WalletLedger.Infrastructure.Persistence;
+using WalletLedger.Infrastructure.Persistence.Repositories;
 
 namespace WalletLedger.Infrastructure;
 
@@ -16,6 +18,10 @@ public static class DependencyInjection
 
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(connectionString));
+
+        services.AddScoped<IWalletRepository, WalletRepository>();
+        services.AddScoped<ILedgerRepository, LedgerRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
