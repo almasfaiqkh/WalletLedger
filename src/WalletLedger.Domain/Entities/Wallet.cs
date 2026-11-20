@@ -12,7 +12,7 @@ public class Wallet
 
     // Mencegah race condition saat saldo diubah bersamaan
     [Timestamp]
-    public byte[] RowVersion { get; set; } = Array.Empty<byte>();
+    public uint RowVersion { get; set; }
 
     public User? User { get; set; }
 }
